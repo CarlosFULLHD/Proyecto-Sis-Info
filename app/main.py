@@ -1,7 +1,7 @@
 from app import app
-from contacts import contacts
+from entrada import entrada
 
-app.register_blueprint(contacts)
+app.register_blueprint(entrada)
 
 # starting the app
 print("hola")

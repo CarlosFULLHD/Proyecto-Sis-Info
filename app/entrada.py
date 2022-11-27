@@ -4,27 +4,23 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import login_user, login_required, logout_user, current_user
 
 from datetime import datetime
-contacts = Blueprint('contacts', __name__, template_folder='app/templates')
+entrada = Blueprint('entrada', __name__, template_folder='app/templates')
 
 
-@contacts.route('/')
+@entrada.route('/')
 def Index():
-    cur = mysql.connection.cursor()
-    cur.execute('SELECT * FROM datosusuario')
-    data = cur.fetchall()
-    cur.close()
-    return render_template('PaginaPrincipal/Principal.html'),
+    return render_template('PaginaPrincipal/Principal.html')
 
-@contacts.route('/')
+@entrada.route('/')
 def Registro_Frame():
     return render_template('Registro/Registro.html')
 
-@contacts.route('/')
+@entrada.route('/')
 def Login_Frame():
     return render_template('pruebaLogin/Login.html')
 
 
-@contacts.route('/Paginaweb/index.html', methods=['GET', 'POST'])
+@entrada.route('/Paginaweb/index.html', methods=['GET', 'POST'])
 def Iniciar_Sesion():
     if request.method == 'POST':
         print("Conexion")
@@ -43,13 +39,13 @@ def Iniciar_Sesion():
             data = cur.fetchone()
             if contra==data[0]:
                 print("accesso")
-                return render_template('PaginaPrincipal/Principal.html', contacts=data)
+                return render_template('PaginaPrincipal/Principal.html', entrada=data)
             else:
                 try:
-                    return redirect(url_for('contacts.Login_Frame'))
+                    return redirect(url_for('entrada.Login_Frame'))
                 except Exception as e:
                     flash(e.args[1])
-                    return redirect(url_for('contacts.Login_Frame'))
+                    return redirect(url_for('entrada.Login_Frame'))
  
 def ultimoreg(tabla):
     cadena="Select * from "+tabla
@@ -67,7 +63,7 @@ def ultimoreg(tabla):
 
 
 
-@contacts.route('/Registro/Registro.html', methods=['GET', 'POST'])
+@entrada.route('/Registro/Registro.html', methods=['GET', 'POST'])
 def Registro_Usuario():
     if request.method == 'POST':
         print("Registro")
@@ -99,10 +95,10 @@ def Registro_Usuario():
                 return render_template('PaginaPrincipal/Principal.html')
             else:
               print("Contraseñas no coinciden") 
-              return redirect(url_for('contacts.Registro_Frame'))
+              return redirect(url_for('entrada.Registro_Frame'))
         else:
             print("Este Usuario ya existe")
-            return redirect(url_for('contacts.Registro_Frame'))
+            return redirect(url_for('entrada.Registro_Frame'))
 
 
 
@@ -112,17 +108,17 @@ def Registro_Usuario():
  
     
 
-@contacts.route('/edit/<id>', methods=['POST', 'GET'])
+@entrada.route('/edit/<id>', methods=['POST', 'GET'])
 def get_contact(id):
     cur = mysql.connection.cursor()
-    cur.execute('SELECT * FROM contacts WHERE id = %s', (id))
+    cur.execute('SELECT * FROM entrada WHERE id = %s', (id))
     data = cur.fetchall()
     cur.close()
     print(data[0])
     return render_template('edit-contact.html', contact=data[0])
 
 
-@contacts.route('/update/<id>', methods=['POST'])
+@entrada.route('/update/<id>', methods=['POST'])
 def update_contact(id):
     if request.method == 'POST':
         fullname = request.form['fullname']
@@ -130,7 +126,7 @@ def update_contact(id):
         email = request.form['email']
         cur = mysql.connection.cursor()
         cur.execute("""
-            UPDATE contacts
+            UPDATE entrada
             SET fullname = %s,
                 email = %s,
                 phone = %s
@@ -138,13 +134,13 @@ def update_contact(id):
         """, (fullname, email, phone, id))
         flash('Contact Updated Successfully')
         mysql.connection.commit()
-        return redirect(url_for('contacts.Index'))
+        return redirect(url_for('entrada.Index'))
 
 
-@contacts.route('/delete/<string:id>', methods=['POST', 'GET'])
+@entrada.route('/delete/<string:id>', methods=['POST', 'GET'])
 def delete_contact(id):
     cur = mysql.connection.cursor()
-    cur.execute('DELETE FROM contacts WHERE id = {0}'.format(id))
+    cur.execute('DELETE FROM entrada WHERE id = {0}'.format(id))
     mysql.connection.commit()
     flash('Contact Removed Successfully')
-    return redirect(url_for('contacts.Index'))
+    return redirect(url_for('entrada.Index'))
