@@ -9,7 +9,10 @@ entrada = Blueprint('entrada', __name__, template_folder='app/templates')
 
 @entrada.route('/')
 def Index():
-    return render_template('PaginaPrincipal/Principal.html')
+    print("ODIOAKI")
+    return render_template('pruebaLogin/Login.html')
+    #return render_template('Registro/Registro.html')
+    #return render_template('PaginaPrincipal/Principal.html')
 
 @entrada.route('/')
 def Registro_Frame():
@@ -30,9 +33,9 @@ def Iniciar_Sesion():
         cur.execute('Select count(nombreUsuario) from datosUsuario where nombreUsuario = %s group by nombreUsuario ', [usuario])
         data = cur.fetchone()
         cur.close()
-        print(data)
         if not data:
             print("Este usuario no existe")
+            return redirect(url_for('entrada.Login_Frame'))
         else:
             cur = mysql.connection.cursor()
             cur.execute('SELECT datosusuario.contrasenia  FROM datosusuario  WHERE datosusuario.nombreUsuario = %s ', [usuario])
@@ -144,3 +147,5 @@ def delete_contact(id):
     mysql.connection.commit()
     flash('Contact Removed Successfully')
     return redirect(url_for('entrada.Index'))
+
+    
