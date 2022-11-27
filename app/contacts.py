@@ -2,6 +2,8 @@ from flask import Blueprint, request, render_template, redirect, url_for, flash
 from db import mysql
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import login_user, login_required, logout_user, current_user
+
+from datetime import datetime
 contacts = Blueprint('contacts', __name__, template_folder='app/templates')
 
 
@@ -11,16 +13,19 @@ def Index():
     cur.execute('SELECT * FROM datosusuario')
     data = cur.fetchall()
     cur.close()
-    return render_template('pruebaLogin/Login.html', contacts=data)
+    return render_template('PaginaPrincipal/Principal.html'),
 
-def is_empty(a):
-    return a == set()
+@contacts.route('/')
+def Registro_Frame():
+    return render_template('Registro/Registro.html')
 
-
+@contacts.route('/')
+def Login_Frame():
+    return render_template('pruebaLogin/Login.html')
 
 
 @contacts.route('/Paginaweb/index.html', methods=['GET', 'POST'])
-def add_contact():
+def Iniciar_Sesion():
     if request.method == 'POST':
         print("Conexion")
         usuario = request.form['user']
@@ -39,25 +44,73 @@ def add_contact():
             if contra==data[0]:
                 print("accesso")
                 return render_template('PaginaPrincipal/Principal.html', contacts=data)
+            else:
                 try:
-                     return redirect(url_for('/PaginaPrincipal/PaginaPrincipal.html'))
+                    return redirect(url_for('contacts.Login_Frame'))
                 except Exception as e:
                     flash(e.args[1])
-                    return redirect(url_for('contacts.Index'))
+                    return redirect(url_for('contacts.Login_Frame'))
+ 
+def ultimoreg(tabla):
+    cadena="Select * from "+tabla
+    cur = mysql.connection.cursor()        
+    cur.execute(cadena)
+    data = cur.fetchall()
+    cur.close()
+    for  row in data:
+        i=0
+        for columna in row:
+            if i==0:
+                aux=columna
+            i=i+1
+    return(aux)         
+
+
+
+@contacts.route('/Registro/Registro.html', methods=['GET', 'POST'])
+def Registro_Usuario():
+    if request.method == 'POST':
+        print("Registro")
+        id=ultimoreg("usuario")+1
+        usuario = request.form['user']
+        contra = request.form['pass1']
+        contra2 = request.form['pass2']
+        mail = request.form['email']
+        now = datetime.now()
+        fecha=now.date()
+        
+        cur = mysql.connection.cursor()        
+        cur.execute('Select count(nombreUsuario) from datosUsuario where nombreUsuario = %s group by nombreUsuario ', [usuario])
+        data = cur.fetchone()
+        cur.close()
+        if not data:
+            if contra==contra2:
+                cur = mysql.connection.cursor()        
+                cur.execute('INSERT INTO usuario (idUsuario, tipoCuenta_idTipoCuenta, persona_idPersona, empresa_idEmpresa) VALUES (%s, %s, NULL, NULL); ', (id,1))
+                flash('Register Successfully')
+                mysql.connection.commit()
+                cur.close()
+
+                cur = mysql.connection.cursor()        
+                cur.execute('INSERT INTO datosusuario (idDatosUsuario, nombreUsuario, contrasenia, fechaCreacion, estado, usuario_idUsuario) VALUES (%s, %s, %s, %s,1, %s);', (id,usuario,contra,fecha,id))
+                flash('Register Successfully')
+                mysql.connection.commit()
+                cur.close()
+                return render_template('PaginaPrincipal/Principal.html')
             else:
-                print("Contrasenia incorrecta")
+              print("Contraseñas no coinciden") 
+              return redirect(url_for('contacts.Registro_Frame'))
+        else:
+            print("Este Usuario ya existe")
+            return redirect(url_for('contacts.Registro_Frame'))
+
+
 
         
-  
-
-
-            
-        try:
-            return redirect(url_for('contacts.Index'))
-        except Exception as e:
-            flash(e.args[1])
-            return redirect(url_for('contacts.Index'))
-
+        
+       
+ 
+    
 
 @contacts.route('/edit/<id>', methods=['POST', 'GET'])
 def get_contact(id):

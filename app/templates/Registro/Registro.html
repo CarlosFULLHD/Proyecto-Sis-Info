@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registrarse</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/Registro.css') }}" />
+    <link href="https://fonts.googleapis.com/css?family=Sriracha&display=swap" rel="stylesheet"><!--para sacar la fuente de nuestra letra xd -->
+</head>
+<body>
+    <!-- COPIA DEL HEADER NORMAL -->
+    <header>
+        <div class="container">
+        <!-- Vamos a poner nuestros elementos dentro de un container y le damos un ancho maximo, margen automatico para que se mantenga en el centro -->
+            <img class="logo" src="static/css/images/Registro/logostudiocuisine.png" alt="Logo StudioCuisine">      
+        <!-- <div class="logocuisine"></div> -->
+              
+              <nav>
+                  <a href="#seccion1">Inicio</a>
+                  <a href="#">Productos</a>
+                  <a href="#">Antójate</a>
+                  <a href="#">Restaurantes</a>
+                  <a href="#">Contactanos</a>
+                  <a href=""></a><!-- PEDIR Aqui se hara el pedido xd -->
+              </nav>   
+          </div>
+          
+  
+</header>
+
+<!-- ========================================================================================== -->
+<section class="seccionlogin">
+    <div class="fondogris">
+
+        <!-- <h1 class="titulologin">Inicio de Sesion</h1> -->
+        <img class="imagenlogin" src="static/css/images/Registro/iconlogin.png" alt="Logo StudioCuisine">      
+        
+        <!-- CAMBIAR: action="por la direccion de la pagina web a donde se quiere enviar despues de enviar el formulario(login).html" -->
+        
+        <form action="/Registro/Registro.html" method="POST" class="formulario">
+<!-- AQUI YA SABEN, CAMBIAN el method ENTRE "GET"(no seguro"se muestra en el link de arriba") Y "POST"(seguro"NO se muestra en el link de arriba") para las pruebas -->
+            <div class="usuario">
+                <label for="iuser" class="labelusuario">Ingrese Usuario: </label>   
+                <input id="iuser" class="campouser" name="user" placeholder="Ingrese un nombre de usuario">
+            </div>
+            
+            <!--para backend usar name de ambos campos-->
+            <!-- campos para backend: user(usuario), pass1(contraseña 1), pass2(contraseña 2), email(para el e-mail) -->
+                                        
+            <div class="contrasena1">
+                <label for="ipassword1" class="labelpassword1">Ingrese una contraseña: </label>   
+                <input id="ipassword1" class="campopassword1" name="pass1" type="password" placeholder="Contraseña">
+            </div>
+            
+            <div class="contrasena2">
+                <label for="ipassword2" class="labelpassword2">Vuelva a ingresar la contraseña: </label>   
+                <input id="ipassword2" class="campopassword2" name="pass2" type="password" placeholder="Vuelve a ingresar tu contraseña">
+
+            </div>
+            <div class="email">
+                <label for="iemail" class="labelemail">E-mail: </label>   
+                <input id="iemail" class="campoemail" name="email" type="email" placeholder="Ingrese su e-mail">
+                <br>
+                <input class="botonregistrarse" type="submit" value="Registrarse">
+            </div>
+        </form>
+        <!-- Este boton no tiene funcion por ahora xd, deberia ser un link a otra pagina, lo hare despues :) -->
+        <button class="atras">Atras</button>
+    </div>
+
+</section>
+    
+</body>
+</html>
