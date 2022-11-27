@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu Studio Cuisine</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/login.css') }}" />
+    
+     <link href="https://fonts.googleapis.com/css?family=Sriracha&display=swap" rel="stylesheet"><!--para sacar la fuente de nuestra letra xd -->
+</head>
+<body>
+    <header>
+            <div class="container">
+            <!-- Vamos a poner nuestros elementos dentro de un container y le damos un ancho maximo, margen automatico para que se mantenga en el centro -->
+                <img class="logo" src="static/css/images/logostudiocuisine.png" alt="Logo StudioCuisine">      
+            <!-- <div class="logocuisine"></div> -->
+                  
+                  <nav>
+                      <a href="#seccion1">Inicio</a>
+                      <a href="#">Productos</a>
+                      <a href="#">Antójate</a>
+                      <a href="#">Restaurantes</a>
+                      <a href="#">Contactanos</a>
+                      <a href=""></a><!-- PEDIR Aqui se hara el pedido xd -->
+                  </nav>   
+              </div>
+              
+      
+    </header>
+
+    <!-- ========================================================================================== -->
+    <section class="seccionlogin">
+        <div class="fondogris">
+
+            <!-- <h1 class="titulologin">Inicio de Sesion</h1> -->
+            <img class="imagenlogin" src="static/css/images/iconlogin.png" alt="Logo StudioCuisine">      
+            <!-- CAMBIAR: action="por la direccion de la pagina web a donde se quiere enviar despues de enviar el formulario(login).html" -->
+            
+            <form action="/Paginaweb/index.html" method="POST" class="formulario">
+                <div class="usuario">
+                    <label for="iuser">Usuario: </label>   
+                    <input id="iuser" class="campouser" name="user">
+                </div>
+                <!--para backend usar name de ambos campos-->
+                <!-- campos para backend: user(usuario), pass(contraseña) -->
+                                            
+                <div class="contrasena">
+                    <label for="ipassword">Contraseña: </label>   
+                    <input id="ipassword" class="campopassword" name="pass" type="password">
+                    <br>
+                    <input class="botonenviar" type="submit" value="Iniciar">
+                </div>
+                
+            </form>
+            <!-- Este boton no tiene funcion por ahora xd, deberia ser un link a otra pagina, lo hare despues :) -->
+            <button class="registrar">Registrarse</button>
+        </div>
+
+    </section>
+
+</body>
+</html>

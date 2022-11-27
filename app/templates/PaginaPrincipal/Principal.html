@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Studio Cuisine</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/Principal.css') }}" />
+</head>
+<body>
+    <header>
+        <div class="container">
+            
+            <div class="logocuisine"></div>
+            <nav>
+                <a href="#">Inicio</a>
+                <a href="#vermenu">Productos</a>
+                <a href="#">Antójate</a>
+                <a href="#">Restaurantes</a>
+                <a href="#">Contactanos</a>
+                <a href=""></a><!-- PEDIR Aqui se hara el pedido xd -->
+                
+
+            </nav>
+
+
+
+        </div>
+
+    </header>
+    <section id="hero">
+        
+           <div class="img-container"></div>
+
+
+
+           <div class="texto">
+                <h2>¡Más que una cadena de cocina!</h2>
+
+                    <p>Studio Cuisine es un restaurante que maneja diferentes líneas de comida dentro. 
+                    <br>Las líneas de comida
+                    son: “Combi” (comida rápida), <br>“Máito Chifa” (chifa peruana), <br>“Lego Burger” (hamburguesas armadas al
+                    estilo de cada cliente), <br>“Salchipapus” (salchipapas) y <br>“Pocho el Pollo” (pollo frito).</p>
+
+                <button>Antojate</button>
+            
+                <button>Ver Menu</button>
+            </div>
+
+
+
+        
+    </section>
+
+    <section id="vermenu">
+        <div class="container">
+        <h3>Selecciona una de las imágenes para ingresar al menú del restaurante:</h3>       
+            <!-- Al poner .carta automaticamente lo identifica como si fuera "div.carta -->
+            <!-- En este caso usa: .carta*3 porque necesita 3 -->
+            <!-- Se clikea un cursor despues mantienes alt para tener el cursor en 3 partes -->
+            
+            <!-- NECESITAMOS UN CONTAINER PARA EVITAR QUE CUANDO LA PESTAÑA SE VAYA REDUCIENDO LA PAGINA WEB SE ALOQUE xd -->
+            
+            <!-- .programas, un contenedor que nos va a servir para envolverlos a todos -->
+            <div class="programas">
+            
+            <div class="carta">
+                    <h3>Combi</h3>
+                    <button>Pedir </button>
+    
+            </div>
+            <div class="carta">
+                    <h3>Salchipapus</h3>    
+                    <button>Pedir</button>
+         
+            </div>
+            <div class="carta">
+                    <h3>Maito Chifa</h3>
+                    <button>Pedir</button>           
+            </div>
+            <div class="carta">
+                <h3>Pocho el pollo</h3>
+                <button>Pedir</button>         
+        </div>
+            </div>
+        </div>
+
+
+            <div class="informacion">
+
+                <div class="container">
+                    <h2>Más de nosotros:</h2>       
+                        <!-- Al poner .carta automaticamente lo identifica como si fuera "div.carta -->
+                        <!-- En este caso usa: .carta*3 porque necesita 3 -->
+                        <!-- Se clikea un cursor despues mantienes alt para tener el cursor en 3 partes -->
+                        
+                        <!-- NECESITAMOS UN CONTAINER PARA EVITAR QUE CUANDO LA PESTAÑA SE VAYA REDUCIENDO LA PAGINA WEB SE ALOQUE xd -->
+                        
+                        <!-- .programas, un contenedor que nos va a servir para envolverlos a todos -->
+                        <div class="programas">
+                        
+                        <div class="cartas2">
+                            <h3>Acerca de</h3>    
+                            <p>Studio Cuisine es un Dark Kitchen donde puedes encontrar diferentes líneas de comida para degustar y escoger según tu gusto.</p>                  
+                        </div>
+                        <div class="cartas2">
+                            <h3>Información</h3>    
+                            <p>Donde encontrarnos:<br>
+                                Auquisamaña Alto, Calle Jazmines #100.</p>         
+                        </div>
+                        <div class="cartas2">
+                            <h3>Acerca de</h3>    
+                            <p>Celular:  79151105<br>
+                                email: std.cuisine@gmail.com</p>
+                        </div>
+                        </div>
+                    </div>
+                         
+                
+                
+
+            </div>
+
+
+
+
+    </section>    
+
+</body>
+</html>

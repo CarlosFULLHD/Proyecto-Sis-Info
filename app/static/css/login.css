@@ -1,0 +1,151 @@
+html{
+    background-color: black;
+    scroll-behavior: smooth;
+}
+body{
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    color: white;
+}
+
+header{
+    background-color: black;
+    font-size: 2em;
+}
+header .container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+header nav{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    
+}
+header a{
+    padding: 5px 12px;
+    text-decoration: none;
+    color: rgb(230, 225, 225);
+
+}
+header a:hover{
+    color: aqua;
+}
+
+button:hover{
+    background-color: rgb(253, 152, 152);
+    box-shadow: 2px 2px 10px rgba(0,0,0,1);
+}
+.container{
+    max-width: 100%;/*Este valor contiene el maximo eprmitido de ancho por la pantalla*/
+    margin: auto;
+}
+.logo{
+    margin-left: 50px;
+    width: 400px;
+    height: 160px;
+}
+
+.titulologin{
+    
+    font-size: 4rem;
+    text-align: center;
+    color: white;
+}
+.imagenlogin{
+    width: 360px;
+    height: 360px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+
+}
+.fondogris{
+    padding-top: 20px;
+    padding-bottom: 30px;
+    width: 85vw;
+    margin-left: auto;
+    margin-right: auto;
+   
+    background-color:#2F2C2C;
+    border-radius: 50px;
+}
+.formulario{
+    /* padding-left: 30%; */
+    text-align: center;
+}
+.usuario,
+.contrasena{
+    font-size: 3em;
+}
+
+.campouser, 
+.campopassword{
+    width: 500px;
+    height: 50px;
+}
+.registrar,
+.botonenviar{
+    display: block;
+    font-size: 1.4rem;
+    font-weight: bold;
+
+    padding: 10px 30px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 15px;
+    margin-bottom: 20px;
+    width:283px;
+	height:66px;
+
+    border-radius: 20px;
+    border: 2px solid rgba(0, 0,0,0.5);
+    color: white;
+    background-color: #3D8B8D;	
+}
+
+
+.botonenviar:hover{
+    background-color: rgb(253, 152, 152);
+    box-shadow: 2px 2px 10px rgba(0,0,0,1);
+}
+
+
+/*
+==========================================================================================================
+PARA MAYOR DE 720 px(pantalla PC)
+==========================================================================================================
+*/
+@media (min-width: 720px){
+    /*Llamar al mismo estilo header .container porque debe REEMPLAZAR*/
+    header{
+        /*Para que el header (barra horizontal de arriba), no se mueva y tambien si o si debemos
+        darle el width del 100%*/
+        position: fixed;
+        width: 100%;
+        background-position: left top;
+    }
+
+    header nav{
+        flex-direction: row;
+        align-items: center;
+    /*Debemos sacar padding porque en version web no sirve xd*/
+        padding: 36px;
+        padding-right: 20px;/*para que no se vaya tanto al costado y darle padding a la derecha xd*/
+    
+    }
+    header .container{
+        flex-direction: row;
+        justify-content: space-between;/*Para separar los contenidos*/
+    }
+    .botonenviar{
+        margin-left: 60vw;
+    }
+    .registrar{
+        margin-left: 15vw;
+    }
+    .seccionlogin{
+        padding-top: 160px;
+    }
+
+}

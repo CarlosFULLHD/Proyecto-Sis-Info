@@ -1,30 +1,58 @@
 from flask import Blueprint, request, render_template, redirect, url_for, flash
 from db import mysql
-
+from werkzeug.security import generate_password_hash, check_password_hash
+from flask_login import login_user, login_required, logout_user, current_user
 contacts = Blueprint('contacts', __name__, template_folder='app/templates')
 
 
 @contacts.route('/')
 def Index():
     cur = mysql.connection.cursor()
-    cur.execute('SELECT * FROM contacts')
+    cur.execute('SELECT * FROM datosusuario')
     data = cur.fetchall()
     cur.close()
-    return render_template('index.html', contacts=data)
+    return render_template('pruebaLogin/Login.html', contacts=data)
+
+def is_empty(a):
+    return a == set()
 
 
-@contacts.route('/add_contact', methods=['POST'])
+
+
+@contacts.route('/Paginaweb/index.html', methods=['GET', 'POST'])
 def add_contact():
     if request.method == 'POST':
-        fullname = request.form['fullname']
-        phone = request.form['phone']
-        email = request.form['email']
-        try:
+        print("Conexion")
+        usuario = request.form['user']
+        contra = request.form['pass']
+        cur = mysql.connection.cursor()        
+        cur.execute('Select count(nombreUsuario) from datosUsuario where nombreUsuario = %s group by nombreUsuario ', [usuario])
+        data = cur.fetchone()
+        cur.close()
+        print(data)
+        if not data:
+            print("Este usuario no existe")
+        else:
             cur = mysql.connection.cursor()
-            cur.execute(
-                "INSERT INTO contacts (fullname, phone, email) VALUES (%s,%s,%s)", (fullname, phone, email))
-            mysql.connection.commit()
-            flash('Contact Added successfully')
+            cur.execute('SELECT datosusuario.contrasenia  FROM datosusuario  WHERE datosusuario.nombreUsuario = %s ', [usuario])
+            data = cur.fetchone()
+            if contra==data[0]:
+                print("accesso")
+                return render_template('PaginaPrincipal/Principal.html', contacts=data)
+                try:
+                     return redirect(url_for('/PaginaPrincipal/PaginaPrincipal.html'))
+                except Exception as e:
+                    flash(e.args[1])
+                    return redirect(url_for('contacts.Index'))
+            else:
+                print("Contrasenia incorrecta")
+
+        
+  
+
+
+            
+        try:
             return redirect(url_for('contacts.Index'))
         except Exception as e:
             flash(e.args[1])

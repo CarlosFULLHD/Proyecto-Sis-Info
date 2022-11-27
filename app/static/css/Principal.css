@@ -1,0 +1,187 @@
+html{
+    background-color: black;
+    scroll-behavior: smooth;
+}
+body{
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    margin: 0;
+}
+h1{font-size: 3.5em;}
+h2{font-size: 2.9em;}
+h3{font-size: 2em;}
+
+button{
+    font-size: 1em;
+    font-weight: bold;
+    padding: 10px 30px;
+    margin: 30px;
+    border-radius: 10px;
+    border: 2px solid rgba(0, 0,0,0.5);
+    color: white;
+    background-color: rgb(237, 0, 0);
+}
+
+button:hover{
+    background-color: rgb(253, 152, 152);
+    box-shadow: 2px 2px 10px rgba(0,0,0,1);
+}
+
+.container{
+    max-width: 1440px;
+    margin: auto;
+}
+header{
+    background-color: black;
+    background-image: url("images/Principal/Logorecortado.png");
+
+    background-repeat: no-repeat;
+    background-position: top center;
+    font-size: 1.6em;
+}
+
+
+header .container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+header nav{
+    padding-top: 115px;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    
+}
+header a{
+    padding: 5px 12px;
+    text-decoration: none;
+    color: rgb(230, 225, 225);
+
+}
+
+header a:hover{
+    color: aqua;
+}
+#hero{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    flex-direction: column;
+    height: 90vh;/*Altura de 90viohigh va cambiando en base a la altura del dispositivo ocupando el 90% de la pantalla*/
+    color: rgb(0, 0, 0);
+    background-image: linear-gradient(
+        0deg,/*la direccion del gradiente 0deg,*/
+        rgba(0,0,0,0),
+        rgb(0, 0, 0)
+    ) 
+    ,url("images/Principal/imgportada1.png");
+
+
+    /*Una buena tecnica para que haya ams constraste entre el fondo y la letra, colocar una "coma" y antes de eso colocar el "klinear-gradient()"*/
+    background-repeat: no-repeat;/*para que no se repita*/
+    background-size: cover;/*Para que ocupe todo el espacio disponible*/
+    background-position: center center;/*Para que se centree*/ 
+}
+
+#hero .texto{
+    color: rgb(223, 223, 223);
+}
+
+#vermenu{
+    /* padding: 50px 50px; */
+    background-color: black;
+    color: rgb(223, 223, 223);
+    text-align: center;
+}
+/*#vermenu .container{
+    
+     background-color: rgb(81, 78, 78);
+    border-radius: 20px;
+} */
+#vermenu button{
+    background-color: rgb(250, 112, 6);
+
+}
+#vermenu button:hover{
+    background-color: rgb(255, 0, 0);
+
+}
+#vermenu h3{
+    color: white;
+    -webkit-text-stroke: 0.32px black; 
+}
+
+#vermenu .carta{
+
+    /*Hacerlo segun a nuestros gustos*/
+    background-position: center center;/*Centreado a la izq y derecha; centreado arriba y abajo*/
+    background-size: cover ;
+    padding: 50px;
+    margin: 12px;
+    border-radius: 15px;
+}
+.carta:first-child{
+    background-image: url("images/Principal/combi.png");/*usar media/ y tambien que als imagenes usen el guion -*/
+    background-size:cover;
+   
+}
+.carta:nth-child(2){
+    background-image: url("images/Principal/salchis.png");
+    background-size: cover;
+}
+.carta:nth-child(3){
+    background-image: url("images/Principal/maito.png");
+    background-size: cover;
+}
+.carta:nth-child(4){
+    background-image: url("images/Principal/poch.png");
+    background-size: cover;
+}
+
+@media (min-width: 720px){
+    /*Llamar al mismo estilo header .container porque debe REEMPLAZAR*/
+    header{
+        /*Para que el header (barra horizontal de arriba), no se mueva y tambien si o si debemos
+        darle el width del 100%*/
+        position: fixed;
+        width: 100%;
+        background-position: left top;
+    }
+
+    header nav{
+        flex-direction: row;
+        align-items: center;
+    /*Debemos sacar padding porque en version web no sirve xd*/
+        padding: 36px;
+        padding-right: 20px;/*para que no se vaya tanto al costado y darle padding a la derecha xd*/
+    
+    }
+    header .container{
+        flex-direction: row;
+        justify-content: space-between;/*Para separar los contenidos*/
+    }
+
+    #vermenu .programas{
+
+        display: flex;
+        justify-content:space-between;
+    }
+    #vermenu p{
+        display: block;
+        margin-bottom: 30px;
+    }
+    #vermenu .carta{
+        padding: 50px;
+        /*background-size: 100% 150px;100% en x y en i 150px*/
+        background-repeat: no-repeat;/*para que no se repita*/
+        background-position-y: 0;
+        background-color: rgba(50, 50, 50,0.5);
+        box-shadow: 2px 2px 10px rgba(0,0,0,0.5);/*para la sombra*/
+    }
+    #vermenu .informacion{
+        display: block;
+        margin-bottom: 30px;
+    }
+
+}
