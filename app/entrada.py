@@ -11,7 +11,7 @@ entrada = Blueprint('entrada', __name__, template_folder='app/templates')
 def Index():
     print("ODIOAKI")
     #return render_template('pruebaLogin/Login.html')
-    return render_template('login.html')
+    return render_template('quitar.html')
     #return render_template('PaginaPrincipal/Principal.html')
 
 @entrada.route('/')
