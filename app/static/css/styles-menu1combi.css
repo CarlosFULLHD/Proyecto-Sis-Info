@@ -1,0 +1,369 @@
+html{
+    background-color: black;
+    scroll-behavior: smooth;
+}
+body{
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    color: white;
+    margin: 0;
+}
+
+header{
+    background-color: black;
+    font-size: 2em;
+}
+header .container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+header nav{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    
+}
+header a{
+    padding: 5px 12px;
+    text-decoration: none;
+    color: rgb(230, 225, 225);
+
+}
+header a:hover{
+    color: aqua;
+}
+
+button:hover{
+    background-color: rgb(253, 152, 152);
+    box-shadow: 2px 2px 10px rgba(0,0,0,1);
+}
+.container{
+    display: flex;
+    flex-direction: column;
+    background-color: black;
+    max-width: 100%;/*Este valor contiene el maximo eprmitido de ancho por la pantalla*/
+    margin: auto;
+}
+.logo{
+    margin-left: 50px;
+    width: 400px;
+    height: 160px;
+}
+
+.imagenlogin{
+    width: 360px;
+    height: 360px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+
+}
+.fondogris{
+    font-family: "Sriracha",Impact , sans-serif;
+    height: 1000px;
+    padding-top: 20px;
+    padding-bottom: 30px;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+ 
+    /* background-color:#cb1313; */
+    border-radius: 50px;
+}
+
+.titulomenu{
+    margin: 0;
+    color: #EC943C;
+    font-family: Sriracha;
+    font-size: 48px;
+    font-weight: 400;
+
+    text-align: center;
+    font-size: 3rem;
+    letter-spacing: 1px;
+    font-weight: 500;
+}
+
+
+.contenido{
+    /* background-color:blueviolet; */
+    display: grid;
+    grid-template-columns: 1fr;
+}
+.container-cards{
+    padding-left: 30px;
+    margin-right: 25px;
+    background-color:#2F2C2C;
+    border-radius: 25px;
+    
+}
+.card{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 50px;
+    font-size: 2rem;
+}
+.producto{
+    
+    font-size: 2rem;
+}
+.precio{
+    display: flex;
+    align-items: center;
+    font-size: 1.7rem;
+}
+.info{
+    margin: 30px 30px;
+    border-radius: 25px;
+
+    background-color:darkgray;
+}
+.contenedorboton{
+    
+    display: flex;
+    align-items: center;
+    /* justify-content: center; */
+}
+.textocarrito{
+    margin-right: 30px;
+    padding: 20px 35px;
+    border-radius: 150px;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: white;
+    background-color: #44818B;
+}
+.textocarrito:hover{
+    background-color: rgb(81, 227, 226);
+    box-shadow: 2px 2px 10px rgba(0,0,0,1);
+}
+
+.content-derecha{
+    margin: 30px 0px;
+    border-radius: 25px;
+    background-color:#2F2C2C;
+}
+
+.especialidades{
+    
+    margin: 10px 30px
+}
+.titulo-esp{
+    font-size: 2.2rem;
+    font-weight: 1000;
+}
+
+.marcas{
+    display: block;
+    align-items: center;
+    text-align: center;
+}
+.link-marcas{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 300px;
+    max-height: 300px;
+    margin-bottom: 35px;
+}
+.img-marcas{   
+    display: block;
+    
+    max-width: 300px;
+    max-height: 300px;
+ 
+}
+
+.informacionadicional{
+    font-family: "Sriracha",Impact , sans-serif;
+    margin-top: 5600px;
+    height: 475px;
+
+
+  background-color: black;
+}
+.container2{
+    display: flex;
+    flex-direction: column;
+}
+.acercade{
+    margin-left: 35px;
+    margin-bottom: 30px;
+    border-radius: 35px;
+    background-color:  #2F2C2C;
+}
+.imagenlogo2{
+    display: block;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+}
+.logo2{
+    width: 600px;
+}
+.marcas .titulo-esp{
+    text-decoration: solid;
+}
+.card1{
+    font-size: 2rem;
+    text-align: center;
+    justify-content: center;
+}
+.textoespecialidades{
+    font-size: 2rem;
+}
+/* .card1{
+    display: flex;
+    flex-direction: column;
+    margin-left: 15px;
+    margin-right: 15px;
+} */
+
+/*
+==========================================================================================================
+PARA MAYOR DE (medias querys)
+==========================================================================================================
+
+*/
+@media (min-width: 950px){
+.informacionadicional{
+    margin-top: 5200px;
+}
+}
+@media (min-width: 950px){
+    .informacionadicional{
+        margin-top: 5200px;
+    }
+}
+
+@media (min-width: 1600px){
+    /*Llamar al mismo estilo header .container porque debe REEMPLAZAR*/
+    header{
+        /*Para que el header (barra horizontal de arriba), no se mueva y tambien si o si debemos
+        darle el width del 100%*/
+        position: fixed;
+        width: 100%;
+        background-position: left top;
+    }
+
+    header nav{
+        flex-direction: row;
+        align-items: center;
+    /*Debemos sacar padding porque en version web no sirve xd*/
+        padding: 36px;
+        padding-right: 20px;/*para que no se vaya tanto al costado y darle padding a la derecha xd*/
+    
+    }
+    header .container{
+        flex-direction: row;
+        justify-content: space-between;/*Para separar los contenidos*/
+    }
+
+    .seccionmenu{
+        padding-top: 160px;
+    }
+
+    .contenido{
+        /* background-color:blueviolet; */
+        display: grid;
+        grid-template-columns: 3fr 1fr;
+        gap: 15px;
+    }
+    .container-cards{
+        margin: 30px 45px;
+        
+        border-radius: 25px;
+    }
+
+    /* PARA LOS MENUS */
+    .card{
+        
+        
+        margin: 25px 0px;
+
+        display: grid;
+        grid-template-columns: auto auto auto auto;
+        gap: 30px;
+    }
+    .producto{
+        
+        font-size: 2rem;
+    }
+    .precio{
+        display: flex;
+        align-items: center;
+        font-size: 1.7rem;
+    }
+
+
+    .informacionadicional{
+        margin-top: 3200px;
+        height: 200px;
+    }
+
+    .container2{
+        display: grid;
+        grid-template-columns: 65% 34%;
+        gap: 1%;
+    }
+
+    .textocarrito:hover{
+        background-color: rgb(81, 227, 226);
+        box-shadow: 2px 2px 10px rgba(0,0,0,1);
+    }
+
+    .acercade{
+        display: flex;
+        flex-direction: row;
+    }
+
+    .card1{
+        padding: 0 25px;
+        border-radius: 60px;
+        font-family: "Sriracha",Impact , sans-serif;
+        margin: 25px 25px;
+        /* background-color: aqua; */
+        background-color: #2F2C2C;
+    }
+    .logo2{
+        width: 500px;  
+    }
+}
+
+
+@media (min-width: 1800px){
+    .logo2{
+        width: 600px;  
+    }
+    .informacionadicional{
+        margin-top: 2200px;
+        height: 200px;
+        
+    }
+    .container2{
+        display: grid;
+        grid-template-columns: auto auto;
+        gap: 1%;
+    }
+}
+
+@media (min-width: 2000px){
+    .logo2{
+        width: 680px;
+    }
+    .informacionadicional{
+        margin-top: 1900px;
+        height: 200px;
+        
+    }
+}
+@media (min-width: 2400px){
+    .logo2{
+        width: 680px;
+    }
+    .informacionadicional{
+        margin-top: 1100px;
+        height: 200px;
+        
+    }
+}
