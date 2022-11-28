@@ -13,7 +13,9 @@ h3{font-size: 2rem;}
     font-size: 1.8rem;
 
 }
-button{
+
+.links-button{
+    text-decoration: none;
     font-size: 1.5rem;
     font-weight: bold;
     padding: 10px 30px;
@@ -24,7 +26,7 @@ button{
     background-color: rgb(237, 0, 0);
 }
 
-button:hover{
+.links-button:hover{
     background-color: rgb(253, 152, 152);
     box-shadow: 2px 2px 10px rgba(0,0,0,1);
 }
