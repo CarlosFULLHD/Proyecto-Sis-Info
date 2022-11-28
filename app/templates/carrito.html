@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carrito</title>
+    <!-- REFERENCIAMOS A GOOGLE FONTS CON LA FUENTE SRIRACHA -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Sriracha&display=swap" rel="stylesheet">
+    <!-- LINK A CSS -->
+    <link rel="stylesheet" href="/static/css/styles-carrito.css">
+
+
+
+</head>
+<body>
+     <!-- COPIA DEL HEADER NORMAL -->
+     <header>
+        <div class="container">
+        <!-- Vamos a poner nuestros elementos dentro de un container y le damos un ancho maximo, margen automatico para que se mantenga en el centro -->
+            <img class="logo" src="/static/css/images/logostudiocuisine.png" alt="Logo StudioCuisine">      
+        <!-- <div class="logocuisine"></div> -->
+              
+              <nav>
+                  <a href="#seccion1">Inicio</a>
+                  <a href="#">Productos</a>
+                  <a href="#">Antójate</a>
+                  <a href="#">Restaurantes</a>
+                  <a href="#">Contactanos</a>
+                  <a href=""></a><!-- PEDIR Aqui se hara el pedido xd -->
+              </nav>   
+          </div>
+          
+  
+    </header>
+
+    <section class="seccionmenu">
+        <div class="fondogris">
+            <h1 class="titulomenu">Carrito de compras:</h1>
+            <div class="contenido">
+                <div class="container-cards">
+                    <!-- METODO GET -->
+                    <form action="/Paginaweb/index.html" method="GET" class="formulario">
+                        <div class="usuario">
+                            <label for="iuser" class="label">Cantidad: </label>   
+                            <input id="iuser" class="campo" name="user" type="number">
+                        </div>
+                        <!--para backend usar name de ambos campos-->
+                        <!-- campos para backend: user(usuario), pass(contraseña) -->
+                                                    
+                        <div class="contrasena">
+                            <label for="ipassword" class="label">Contraseña: </label>   
+                            <input id="ipassword" class="campo" name="pass" type="password" placeholder="Ingrese su contraseña">
+                            <br>
+                            <input class="botoniniciar" type="submit" value="Iniciar">
+                        </div>
+                        
+                    </form>
+                    
+                </div>
+
+                <div class="content-derecha">
+                    <div class="especialidades">
+                        <h3 class="titulo-esp">Especialidades de Combi:</h3>
+                        <p>Combi grilled burger es una linea de comida de la
+                            familia Studio Cuisine. Este restaurante sirve los mejores 
+                            platos con carne a la parrila como pueden ser hambur
+                            guesas clasicas o hamburguesas con hongos.  Combi no solo 
+                            sirve las mejores hamburguesas de la ciudad sino une a toda 
+                            la familia en un ambiente agradable o brinda el envio a sus consumidores.</p>
+                    </div>
+
+                    <div class="marcas">
+                        <h4 class="titulo-esp">Nuestras marcas:</h4>
+                        <a class="link-marcas" href="/templates/carrito.html">
+                            <img class="img-marcas" src="/static/css/images/pocho_img.png" alt="Imagen pocho el pollo">
+                        </a>
+                        <a class="link-marcas" href="/templates/carrito.html">
+                            <img class="img-marcas" src="/static/css/images/salchis_img.png" alt="Imagen pocho el pollo">
+                        </a>
+                        <a class="link-marcas" href="/templates/carrito.html">
+                            <img class="img-marcas" src="/static/css/images/maito_img.png" alt="Imagen pocho el pollo">
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+    
+    </section>
+</body>
+</html>
