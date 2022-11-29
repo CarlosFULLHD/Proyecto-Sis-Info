@@ -10,9 +10,9 @@ entrada = Blueprint('entrada', __name__, template_folder='app/templates')
 @entrada.route('/')
 def Index():
     print("ODIOAKI")
-    #return render_template('pruebaLogin/Login.html')
+    return render_template('pruebaLogin/Login.html')
     #return render_template('Registro/Registro.html')
-    return render_template('combi.html')
+    #return render_template('carrito.html')
     #return render_template('PaginaPrincipal/Principal.html')
 
 @entrada.route('/')
@@ -71,7 +71,26 @@ def Registro():
 def VolverAtras():
     return render_template('/pruebaLogin/Login.html')
 
+#para ir a "registroadmin" HREF
+@entrada.route('/templates/registroadmin.html')
+def regisAdmin():
+    return render_template('registroadmin.html')
 
+#para ir a "quitar"
+@entrada.route('/templates/quitar.html')
+def quitarAdmin():
+    return render_template('quitar.html')
+
+
+#para ir a "ATRAS" en quitar
+@entrada.route('/templates/admin.html')
+def atrasQuitar():
+    return render_template('admin.html')
+
+#para ir a "ATRAS" en RegistroAdmin with BUTTON
+@entrada.route('/templates/admin.html', methods=['GET', 'POST'])
+def atrasRegistro():
+    return render_template('admin.html')
 
 
 
@@ -79,15 +98,28 @@ def VolverAtras():
 
 #agregar productos
 
-@entrada.route('/templates/carrito.html')
-def Agregar_CombiBBQ():
-    Agregar_carrito("CombiBBQ",33)
+@entrada.route('/templates/carrito_combi.html')
+def Agregar_CombiClasicaQ():
+    Agregar_carrito("Combi Clasica",30)
     return render_template('combi.html')
-    
-@entrada.route('/templates/carrito.html')
-def Agregar_CombiBBQ():
-    Agregar_carrito("CombiBBQ",33)
-    return render_template('combi.html')
+
+@entrada.route('/templates/carrito_maito.html')
+def Agregar_ArrozChaufa():
+    Agregar_carrito("Arroz Chaufa",27)
+    return render_template('maito.html')
+
+@entrada.route('/templates/carrito_pocho.html')
+def Agregar_PipocasPollo():
+    Agregar_carrito("Pipocas de Pollo",23)
+    return render_template('pocho.html')
+
+@entrada.route('/templates/carrito_salchipapus.html')
+def Agregar_Salchipapu():
+    Agregar_carrito("Salchipapu Tradicional",18)
+    return render_template('salchipapus.html')
+
+
+
 
 
 
@@ -95,6 +127,12 @@ def Agregar_CombiBBQ():
 @entrada.route('/Paginaweb/index.html', methods=['GET', 'POST'])
 def Iniciar_Sesion():
     if request.method == 'POST':
+        cur = mysql.connection.cursor()        
+        cur.execute('delete from carrito; ')
+        flash('Register Successfully')
+        mysql.connection.commit()
+        cur.close()
+
         print("Conexion")
         usuario = request.form['user']
         contra = request.form['pass']
