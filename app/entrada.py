@@ -78,6 +78,12 @@ def VolverAtras():
 
 
 #agregar productos
+
+@entrada.route('/templates/carrito.html')
+def Agregar_CombiBBQ():
+    Agregar_carrito("CombiBBQ",33)
+    return render_template('combi.html')
+    
 @entrada.route('/templates/carrito.html')
 def Agregar_CombiBBQ():
     Agregar_carrito("CombiBBQ",33)
