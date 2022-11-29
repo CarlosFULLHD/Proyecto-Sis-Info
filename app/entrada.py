@@ -12,7 +12,7 @@ def Index():
     print("ODIOAKI")
     return render_template('pruebaLogin/Login.html')
     #return render_template('Registro/Registro.html')
-    #return render_template('carrito.html')
+    #return render_template('registroadmin.html')
     #return render_template('PaginaPrincipal/Principal.html')
 
 @entrada.route('/')
@@ -92,7 +92,10 @@ def atrasQuitar():
 def atrasRegistro():
     return render_template('admin.html')
 
-
+#para ir a Restaurante
+@entrada.route('/templates/restaurantes.html')
+def irRestaurantes():
+    return render_template('restaurantes.html')
 
 
 
@@ -242,14 +245,50 @@ def Registro_Usuario():
                 return render_template('index.html')
             else:
               print("Contraseñas no coinciden") 
+              return redirect(url_for('entrada.regisAdmin'))
+        else:
+            print("Este Usuario ya existe")
+            return redirect(url_for('entrada.regisAdmin'))
+
+
+
+@entrada.route('/Registro/Registro_admin.html', methods=['GET', 'POST'])
+def Registro_Admin():
+    if request.method == 'POST':
+        print("Registro Admin")
+        id=ultimoreg("usuario")+1
+        print (id)
+        usuario = request.form['user']
+        contra = request.form['pass1']
+        contra2 = request.form['pass2']
+        mail = request.form['email']
+        now = datetime.now()
+        fecha=now.date()
+        
+        cur = mysql.connection.cursor()        
+        cur.execute('Select count(nombreUsuario) from datosUsuario where nombreUsuario = %s and estado = 3 group by nombreUsuario ', [usuario])
+        data = cur.fetchone()
+        cur.close()
+        if not data:
+            if contra==contra2:
+                cur = mysql.connection.cursor()        
+                cur.execute('INSERT INTO usuario (idUsuario, tipoCuenta_idTipoCuenta, persona_idPersona, empresa_idEmpresa) VALUES (%s, %s, NULL, NULL); ', (id,3))
+                flash('Register Successfully')
+                mysql.connection.commit()
+                cur.close()
+
+                cur = mysql.connection.cursor()        
+                cur.execute('INSERT INTO datosusuario (idDatosUsuario, nombreUsuario, contrasenia, fechaCreacion, estado, usuario_idUsuario) VALUES (%s, %s, %s, %s,1, %s);', (id,usuario,contra,fecha,id))
+                flash('Register Successfully')
+                mysql.connection.commit()
+                cur.close()
+                return redirect(url_for('entrada.atrasRegistro'))
+            else:
+              print("Contraseñas no coinciden") 
               return redirect(url_for('entrada.Registro_Frame'))
         else:
             print("Este Usuario ya existe")
             return redirect(url_for('entrada.Registro_Frame'))
-
-
-
-
 
 
 
@@ -278,7 +317,7 @@ def Quitar_Admin():
                 cur.close()
                 
                 print("Usuario Eliminado")
-                return render_template('PaginaPrincipal/Principal.html', entrada=data)
+                return redirect(url_for('entrada.atrasRegistro'))
                 #return redirect(url_for('entrada.Quitar_Frame'))
 
 

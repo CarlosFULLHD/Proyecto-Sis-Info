@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RESTAURANTES</title>
+<!-- REFERENCIAMOS A GOOGLE FONTS CON LA FUENTE SRIRACHA -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sriracha&display=swap" rel="stylesheet">
+<!-- LINK A CSS -->
+<!--  -->
+<link rel="stylesheet" type="text/css" href="{{url_for('static',filename='css/restaurantes.css') }}" />
+</head>
+<body>
+    <!-- COPIA DEL HEADER NORMAL -->
+    <header>
+        <div class="container">
+        <!-- Vamos a poner nuestros elementos dentro de un container y le damos un ancho maximo, margen automatico para que se mantenga en el centro -->
+            <img class="logo" src="/static/css/images/logostudiocuisine.png" alt="Logo StudioCuisine">      
+        <!-- <div class="logocuisine"></div> -->
+              
+              <nav>
+                  <a href="/templates/index.html">Inicio</a>
+                  <a href="/templates/menu1combi.html">Productos</a>
+                  <a href="#">Antójate</a>
+                  <a href="#">Restaurantes</a>
+                  <a href="#">Contactanos</a>
+                  <a href=""></a><!-- PEDIR Aqui se hara el pedido xd -->
+              </nav>   
+          </div>
+          
+</header>
+
+<section class="seccionmenu">
+    <div class="fondogris">
+        <h1 class="titulomenu">CONOCE NUESTROS RESTAURANTES:</h1>
+        <div class="contenido">
+            <div class="container-cards">
+
+                  <!-- FORMULARIO -->
+                  <form action="/templates/carrito.html" method="get">
+
+                    <!-- INICIA CARD -->
+                    <div class="card">
+
+                        <div class="img"><img src="/static/css/images/pocho_img.png" alt="Pocho el Pollo"></div>
+                        
+                        
+                        <div class="producto-info">
+                            <h2 class="producto">1. Pocho el Pollo</h2>
+                            <p class="texto">Pocho te ofrece una variedad de pollo frito y la opción de pipocas de pollo para que disfrutes hasta más no poder.</p></div>
+
+                    </div>
+                    <!-- FIN CARD -->
+
+                    <div class="card">
+
+                        <div class="img"><img src="/static/css/images/salchis_img.png" alt="Salchipapus"></div>
+                        
+                        
+                        <div class="producto-info">
+                            <h2 class="producto">2. Salchipapus</h2>
+                            <p class="texto">Salchipapus te ofrece una gran variedad de salchipapas de diferentes tipos y tamaños, donde el sabor nunca termina.</p></div>
+
+                    </div>
+                    <div class="card">
+
+                        <div class="img"><img src="/static/css/images/maito_img.png" alt="Maito Chifa"></div>
+                        
+                        
+                        <div class="producto-info">
+                            <h2 class="producto">3. Maito Chifa</h2>
+                            <p class="texto">Máito Chifa te ofrece la popular chifa peruana, donde podrás encontrar variedad de platillos que te harán disfrutar del buen sabor.</p></div>
+
+                    </div>
+                    <div class="card">
+
+                        <div class="img"><img src="/static/css/images/combi_img.png" alt="Combi-Grilled Burgers"></div>
+                        
+                        
+                        <div class="producto-info">
+                            <h2 class="producto">4. Combi-Grilled Burgers</h2>
+                            <p class="texto">Combi te ofrece exclusivamente lo que es comida rápida, con variedad de hamburguesas, alitas y fingers.</p></div>
+
+                    </div>
+
+                </form>
+            </div>
+
+
+    </div>
+
+</section>
+<section class="informacionadicional">
+    <div class="container2">
+        <div class="acercade">
+            <div class="card1">    
+                <div class="producto-info">
+                    <h2 class="producto">Acerca de:</h2>
+                    <p class="texto">Studio Cuisine es un Dark Kitchen donde puedes encontrar 
+                        diferentes líneas de comida para degustar y escoger según tu gusto.</p></div>
+            </div>
+            <div class="card1">    
+                <div class="producto-info">
+                    <h2 class="producto">Información:</h2>
+                    <p class="texto">Donde encontrarnos:
+                        Auquisamaña Alto, Calle Jazmines #100.</p></div>
+            </div>
+            <div class="card1">    
+                <div class="producto-info">
+                    <h2 class="producto">Contacto:</h2>
+                    <p class="texto">Celular:  79151105
+                        email: std.cuisine@gmail.com</p></div>
+            </div>
+
+        </div>
+
+
+        <div class="imagenlogo2">
+            <img class="logo2"src="/static/css/images/logostudiocuisine.png" alt="LogoStudioCuisine2">
+
+
+        </div>
+
+    </div>
+
+
+
+</section>
+
+
+</body>
+</html>
