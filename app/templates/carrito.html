@@ -4,94 +4,139 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Carrito</title>
-    <!-- REFERENCIAMOS A GOOGLE FONTS CON LA FUENTE SRIRACHA -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Sriracha&display=swap" rel="stylesheet">
-    <!-- LINK A CSS -->
-    <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='css/styles-carrito.css') }}" />
-
-
-
+    <title>RESTAURANTES</title>
+<!-- REFERENCIAMOS A GOOGLE FONTS CON LA FUENTE SRIRACHA -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sriracha&display=swap" rel="stylesheet">
+<!-- LINK A CSS -->
+<!--  -->
+<link rel="stylesheet" type="text/css" href="{{url_for('static',filename='css/style-carrito.css') }}" />
 </head>
 <body>
-     <!-- COPIA DEL HEADER NORMAL -->
-     <header>
+    <!-- COPIA DEL HEADER NORMAL -->
+    <header>
         <div class="container">
         <!-- Vamos a poner nuestros elementos dentro de un container y le damos un ancho maximo, margen automatico para que se mantenga en el centro -->
             <img class="logo" src="/static/css/images/logostudiocuisine.png" alt="Logo StudioCuisine">      
         <!-- <div class="logocuisine"></div> -->
               
               <nav>
-                <a href="/templates/index.html">Inicio</a>
-                  <a href="#">Productos</a>
+                  <a href="/templates/index.html">Inicio</a>
+                  <a href="/templates/menu1combi.html">Productos</a>
                   <a href="#">Antójate</a>
-                  <a href="/templates/restaurantes.html">Restaurantes</a>
+                  <a href="#">Restaurantes</a>
                   <a href="#">Contactanos</a>
                   <a href=""></a><!-- PEDIR Aqui se hara el pedido xd -->
               </nav>   
           </div>
           
-  
-    </header>
+</header>
 
-    <section class="seccionmenu">
-        <div class="fondogris">
-            <h1 class="titulomenu">Carrito de compras:</h1>
-            <div class="contenido">
-                <div class="container-cards">
-                    <!-- METODO GET -->
-                    <form action="/Paginaweb/index.html" method="GET" class="formulario">
-                        <div class="usuario">
-                            <label for="iuser" class="label">Cantidad: </label>   
-                            <input id="iuser" class="campo" name="user" type="number">
-                        </div>
-                        <!--para backend usar name de ambos campos-->
-                        <!-- campos para backend: user(usuario), pass(contraseña) -->
-                                                    
-                        <div class="contrasena">
-                            <label for="ipassword" class="label">Contraseña: </label>   
-                            <input id="ipassword" class="campo" name="pass" type="password" placeholder="Ingrese su contraseña">
-                            <br>
-                            <input class="botoniniciar" type="submit" value="Iniciar">
-                        </div>
-                        
-                    </form>
+<section class="seccionmenu">
+    <h1 class="titulomenu">Bienvenido a tu carrito:</h1>
+    <div class="fondogris">
+        <div class="contenido">
+            <div class="container-cards">
+
+                  <!-- FORMULARIO -->
+                  <form action="/templates/carrito.html" method="get">
+
+                    <!-- INICIA CARD -->
                     
-                </div>
+                         <!-- INICIa el carrito, aun no hay css -->
+                        <div id="shopping-cart">
+                            <div style="background-color:rgb(0, 197, 223); color:black;" class="txt-heading">Carrito de compras</div>		
+                            {% if 'cart_item' in session %}
+                                <a  style="background-color:rgb(207, 7, 7); color:black" id="btnEmpty" href="{{ url_for('.empty_cart') }}">Vaciar Carrito</a>
+                                <table class="tbl-cart" cellpadding="10" cellspacing="1">
+                                <tbody>
+                                    <tr>
+                                        <th style="text-align:left;">Nombre</th>
+                                        <th style="text-align:left;">Codigo</th>
+                                        
+                                        <th style="text-align:right;" width="5%">Cantidad</th>
+                                        <th style="text-align:right;" width="10%">Precio Unitario</th>
+                                        <th style="text-align:right;" width="10%">Precio</th>
+                                        <th style="text-align:center;" width="5%">Quitar</th>
+                                    </tr>
+                                    {% for key, val in session['cart_item'].items() %}
+                                        {% set quantity = session['cart_item'][key]['quantity'] %}
+                                        {% set price = session['cart_item'][key]['price'] %}
+                                        {% set item_price = session['cart_item'][key]['total_price'] %}					
+                                        <tr>
+                                            <td style="color:black;"><img src="/static/images/{{ session['cart_item'][key]['image'] }}" class="cart-item-image" />{{ session['cart_item'][key]['name'] }}</td>
+                                            <td style="color:black;" style="text-align:right;">{{ session['cart_item'][key]['code'] }}</td>
+                                            <!--<td style="text-align:right;">{{ quantity }}</td>-->
+                                            <td style="color:black;text-align:right;">{{ quantity }}</td>
+                                            <td  style="color:black;text-align:right;">&#36; {{ price }}</td>
+                                            <td  style="color:black;text-align:right;">&#36; {{ item_price }}</td>
+                                            <td style="text-align:center;">
+                                                <a href="{{ url_for('.delete_product', code=session['cart_item'][key]['code']) }}" class="btnRemoveAction">
+                                                    <img src="/static/images/icon-delete.png" alt="Remove Item" />
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+                                    <tr>
+                                        <td style="color:black;" colspan="2" align="right">Total:</td>
+                                        <td style="color:black;" align="right">{{ session['all_total_quantity'] }}</td>
+                                        <td style="color:black;" align="right" colspan="2"><strong>&#36; {{ session['all_total_price'] }}</strong></td>
+                                        <td></td>
+                                    </tr>
+                                </tbody>
+                                </table>
+                            {% else: %}
+                                <div class="no-records">Your Cart is Empty</div>
+                            {% endif %}
+                        </div>
+                    
+                    <!-- FIN CARD -->
 
-                <div class="content-derecha">
-                    <div class="especialidades">
-                        <h3 class="titulo-esp">Especialidades de Combi:</h3>
-                        <p>Combi grilled burger es una linea de comida de la
-                            familia Studio Cuisine. Este restaurante sirve los mejores 
-                            platos con carne a la parrila como pueden ser hambur
-                            guesas clasicas o hamburguesas con hongos.  Combi no solo 
-                            sirve las mejores hamburguesas de la ciudad sino une a toda 
-                            la familia en un ambiente agradable o brinda el envio a sus consumidores.</p>
-                    </div>
+                </form>
+            </div>
 
-                    <div class="marcas">
-                        <h4 class="titulo-esp">Nuestras marcas:</h4>
-                        <a class="link-marcas" href="/templates/carrito.html">
-                            <img class="img-marcas" src="/static/css/images/pocho_img.png" alt="Imagen pocho el pollo">
-                        </a>
-                        <a class="link-marcas" href="/templates/carrito.html">
-                            <img class="img-marcas" src="/static/css/images/salchis_img.png" alt="Imagen pocho el pollo">
-                        </a>
-                        <a class="link-marcas" href="/templates/carrito.html">
-                            <img class="img-marcas" src="/static/css/images/maito_img.png" alt="Imagen pocho el pollo">
-                        </a>
 
-                    </div>
+    </div>
 
-                </div>
-
+</section>
+<section class="informacionadicional">
+    <div class="container2">
+        <div class="acercade">
+            <div class="card1">    
+                <div class="producto-info">
+                    <h2 class="producto">Acerca de:</h2>
+                    <p class="texto">Studio Cuisine es un Dark Kitchen donde puedes encontrar 
+                        diferentes líneas de comida para degustar y escoger según tu gusto.</p></div>
+            </div>
+            <div class="card1">    
+                <div class="producto-info">
+                    <h2 class="producto">Información:</h2>
+                    <p class="texto">Donde encontrarnos:
+                        Auquisamaña Alto, Calle Jazmines #100.</p></div>
+            </div>
+            <div class="card1">    
+                <div class="producto-info">
+                    <h2 class="producto">Contacto:</h2>
+                    <p class="texto">Celular:  79151105
+                        email: std.cuisine@gmail.com</p></div>
             </div>
 
         </div>
-    
-    </section>
+
+
+        <div class="imagenlogo2">
+            <img class="logo2"src="/static/css/images/logostudiocuisine.png" alt="LogoStudioCuisine2">
+
+
+        </div>
+
+    </div>
+
+
+
+</section>
+
+
 </body>
 </html>

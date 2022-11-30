@@ -1,4 +1,5 @@
-from flask import Blueprint, request, render_template, redirect, url_for, flash
+import pymysql
+from flask import Blueprint, session, request, render_template, redirect, url_for, flash
 from db import mysql
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import login_user, login_required, logout_user, current_user
@@ -12,7 +13,7 @@ def Index():
     print("ODIOAKI")
     return render_template('pruebaLogin/Login.html')
     #return render_template('Registro/Registro.html')
-    #return render_template('registroadmin.html')
+    #return render_template('index.html')
     #return render_template('PaginaPrincipal/Principal.html')
 
 @entrada.route('/')
@@ -30,7 +31,13 @@ def Quitar_Frame():
     return render_template('quitar.html')
 
 
-
+###############################
+#para ir a CarritoTEMPORAL
+######################33
+@entrada.route('/templates/carrito.html')
+def irCarrito():
+    add_product_to_cart()
+    return render_template('carrito.html')
 
 
 #para ir a menu de Combi
@@ -103,28 +110,126 @@ def irRestaurantes():
 
 @entrada.route('/templates/carrito_combi.html')
 def Agregar_CombiClasicaQ():
-    Agregar_carrito("Combi Clasica",30)
+    Agregar_carrito("Combi Clasica",30,"hclasica.png")
     return render_template('combi.html')
 
 @entrada.route('/templates/carrito_maito.html')
 def Agregar_ArrozChaufa():
-    Agregar_carrito("Arroz Chaufa",27)
+    Agregar_carrito("Arroz Chaufa",27,"arrozchaufa.png")
     return render_template('maito.html')
 
 @entrada.route('/templates/carrito_pocho.html')
 def Agregar_PipocasPollo():
-    Agregar_carrito("Pipocas de Pollo",23)
+    Agregar_carrito("Pipocas de Pollo",23,"pipocasdepollo.png")
     return render_template('pocho.html')
 
 @entrada.route('/templates/carrito_salchipapus.html')
 def Agregar_Salchipapu():
-    Agregar_carrito("Salchipapu Tradicional",18)
+    Agregar_carrito("Salchipapu Tradicional",18,"ssalchipapu.png")
     return render_template('salchipapus.html')
 
 
 
 
+def add_product_to_cart():
+        cursor = None
+        try:
+                        cursor = mysql.connection.cursor() 
+                        cursor.execute("SELECT * FROM carrito")
+                        data = cursor.fetchone()
+                        
+                        itemArray = { data[0] : {'name' : data[1], 'code' : data[0], 'quantity' : data[2], 'price' : data[3],'total_price' : (data[3]*data[2]),'image':data[4] }}
+                        print(itemArray)
+                        session['cart_item'] = itemArray
+                        cantidad_total=data[2]
+                        precio_total=data[3]*data[2]
+                        aux1=cantidad_total
+                        aux2=precio_total
+                        cursor.close()
+                        cursor = mysql.connection.cursor() 
+                        cursor.execute("SELECT * FROM carrito")
+                        data = cursor.fetchall()
+                        
+                        cursor.close()
+                        for row in data:
+                                
+                                itemArray = { row[0] : {'name' : row[1], 'code' : row[0], 'quantity' : row[2], 'price' : row[3],'total_price' : (row[3]*row[2]),'image': row[4] }}
+                                
+                                session['cart_item'] = array_merge(session['cart_item'], itemArray)
+                                cantidad_total=cantidad_total+row[2]
+                                precio_total=precio_total+(row[3]*row[2])
+                                print(cantidad_total,"   ",precio_total)
 
+                        cantidad_total=cantidad_total-aux1
+                        precio_total=precio_total-aux2
+                        session['all_total_quantity'] = cantidad_total
+                        session['all_total_price'] = precio_total
+                        print(session['cart_item']) 
+                        return redirect(url_for('.carrito_frame'))
+        except Exception as e:
+                print(e)
+
+@entrada.route('/templates/carrito.html')
+def carrito_frame():
+        try:
+                return render_template('carrito.html')
+        except Exception as e:
+                print(e)
+@entrada.route('/empty')
+def empty_cart():
+        try:
+                cur = mysql.connection.cursor()        
+                cur.execute('delete from carrito; ')
+                flash('Register Successfully')
+                mysql.connection.commit()
+                cur.close()
+                session.clear()
+                return redirect(url_for('.carrito_frame'))
+        except Exception as e:
+                print(e)
+
+@entrada.route('/delete/<string:code>')
+def delete_product(code):
+        try:
+                all_total_price = 0
+                all_total_quantity = 0
+                session.modified = True
+                
+                for item in session['cart_item'].items():
+                        if item[0] == code:				
+                                session['cart_item'].pop(item[0], None)
+                                if 'cart_item' in session:
+                                        for key, value in session['cart_item'].items():
+                                                individual_quantity = int(session['cart_item'][key]['quantity'])
+                                                individual_price = float(session['cart_item'][key]['total_price'])
+                                                all_total_quantity = all_total_quantity + individual_quantity
+                                                all_total_price = all_total_price + individual_price
+                                break
+                
+                if all_total_quantity == 0:
+                        session.clear()
+                else:
+                        session['all_total_quantity'] = all_total_quantity
+                        session['all_total_price'] = all_total_price
+                
+                #return redirect('/')
+                cur = mysql.connection.cursor()        
+                cur.execute('delete from carrito where Id_carrito=%s; ',code)
+                flash('Register Successfully')
+                mysql.connection.commit()
+                cur.close()
+                return redirect(url_for('.carrito_frame'))
+        except Exception as e:
+                print(e)
+
+def array_merge( first_array , second_array ):
+        if isinstance( first_array , list ) and isinstance( second_array , list ):
+                return first_array + second_array
+        elif isinstance( first_array , dict ) and isinstance( second_array , dict ):
+                return dict( list( first_array.items() ) + list( second_array.items() ) )
+        elif isinstance( first_array , set ) and isinstance( second_array , set ):
+                return first_array.union( second_array )
+        return False
 
 
 @entrada.route('/Paginaweb/index.html', methods=['GET', 'POST'])
@@ -167,11 +272,15 @@ def Iniciar_Sesion():
                     return redirect(url_for('entrada.Login_Frame'))
  
 def ultimoreg(tabla):
+
+     
     cadena="Select * from "+tabla
     cur = mysql.connection.cursor()        
     cur.execute(cadena)
     data = cur.fetchall()
+    print(data)
     cur.close()
+
     if not data:
         return(0)
     else:
@@ -181,22 +290,28 @@ def ultimoreg(tabla):
                 if i==0:
                     aux=columna
                 i=i+1
+            
         return(aux)         
 
 
 
-def Agregar_carrito(prod,precio):
+
+
+def Agregar_carrito(prod,precio,dir):
         print("carrito")
+        print(ultimoreg("carrito"))
         id=ultimoreg("carrito")+1
         print (id)
         cur = mysql.connection.cursor()        
         cur.execute('SELECT sum(carrito.cantidad)  FROM carrito  WHERE carrito.Producto = %s group by carrito.cantidad>0', [prod])
         data = cur.fetchone()
+        print(data)
         cur.close()
+       
         
         if not data:
             cur = mysql.connection.cursor()        
-            cur.execute('INSERT INTO carrito (Id_carrito, Producto, Cantidad, Precio) VALUES (%s, %s, %s, %s); ', (id,prod,1,precio))
+            cur.execute('INSERT INTO carrito (Id_carrito, Producto, Cantidad, Precio,Dir_imagen) VALUES (%s, %s, %s, %s,%s); ', (id,prod,1,precio,dir))
             flash('Register Successfully')
             mysql.connection.commit()
             cur.close()
