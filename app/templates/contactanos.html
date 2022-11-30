@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contactos</title>
+<!-- REFERENCIAMOS A GOOGLE FONTS CON LA FUENTE SRIRACHA -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sriracha&display=swap" rel="stylesheet">
+<!-- LINK A CSS -->
+<link rel="stylesheet" href="{{url_for('static',filename='css/styles-contactanos.css') }}">
+</head>
+<body>
+    <!-- COPIA DEL HEADER NORMAL -->
+    <header>
+        <div class="container">
+        <!-- Vamos a poner nuestros elementos dentro de un container y le damos un ancho maximo, margen automatico para que se mantenga en el centro -->
+            <img class="logo" src="/static/css/images/logostudiocuisine.png" alt="Logo StudioCuisine">      
+        <!-- <div class="logocuisine"></div> -->
+              
+              <nav>
+                  <a href="/templates/index.html">Inicio</a>
+                  <a href="/templates/menu1combi.html">Productos</a>
+                  <a href="#">Antójate</a>
+                  <a href="#">Restaurantes</a>
+                  <a href="#">Contactanos</a>
+                  <a href=""></a><!-- PEDIR Aqui se hara el pedido xd -->
+              </nav>   
+          </div>
+          
+  
+</header>
+
+<section class="seccionmenu">
+    <div class="fondogris">
+        <h1 class="titulomenu">Contáctanos:</h1>
+        <div class="contenido">
+            <div class="container-cards">
+                <iframe class="mapagugul" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1912.2900573581587!2d-68.07560978108972!3d-16.547282261997815!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x915f210716081e7b%3A0xe52bcb1a31edbb80!2sStudio%20Cuisine!5e0!3m2!1ses!2sbo!4v1669816159349!5m2!1ses!2sbo" 
+                width=100% height=100% style="border:0;"
+                 allowfullscreen="" loading="lazy" 
+                 referrerpolicy="no-referrer-when-downgrade"></iframe>
+                 <!-- FORMULARIO -->
+                 
+            </div>
+
+            <div class="content-derecha">
+                <div class="especialidades">
+                    <h3 class="titulo-esp">Pedidos y Contactos:</h3>
+                    <p class="textoespecialidades">Teléfono: 79151105 <br>
+
+                        Dirección: Auquisamaña Alto, <br>
+                                          Calle Jazamines #100
+                                          <br>
+                        email: std.cuisine@gmail.com</p>
+                </div>
+
+                <div class="marcas">
+                    <h4 class="titulo-esp">Nuestras marcas:</h4>
+                    <a class="link-marcas" href="/templates/pocho.html">
+                        <img class="img-marcas" src="/static/css/images/pocho_img.png" alt="Imagen pocho el pollo">
+                    </a>
+                    <a class="link-marcas" href="/templates/combi.html">
+                        <img class="img-marcas" src="/static/css/images/combi_img.png" alt="Imagen combi">
+                    </a>
+                    <a class="link-marcas" href="/templates/salchipapus.html">
+                        <img class="img-marcas" src="/static/css/images/salchis_img.png" alt="Imagen salchipapus">
+                    </a>
+                    <a class="link-marcas" href="/templates/maito.html">
+                        <img class="img-marcas" src="/static/css/images/maito_img.png" alt="Imagen maito">
+                    </a>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+</body>
+</html>

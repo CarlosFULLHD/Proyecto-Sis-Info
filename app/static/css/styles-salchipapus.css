@@ -165,6 +165,13 @@ button:hover{
     max-width: 300px;
     max-height: 300px;
     margin-bottom: 35px;
+
+    transition: transform 0.2s;
+    /*Esto apra la transicion de imagen xd*/
+}
+
+.link-marcas:hover{
+    transform: scale(1.1);
 }
 .img-marcas{   
     display: block;
