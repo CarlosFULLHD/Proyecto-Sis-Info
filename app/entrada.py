@@ -110,23 +110,127 @@ def irRestaurantes():
 
 @entrada.route('/templates/carrito_combi.html')
 def Agregar_CombiClasicaQ():
+    print("clasica")
     Agregar_carrito("Combi Clasica",30,"hclasica.png")
     return render_template('combi.html')
+
+@entrada.route('/templates/carrito_combibbq.html')
+def Agregar_CombiBbq():
+    print("bbq")
+    Agregar_carrito("Combi BBQ",33,"hbbq.png")
+    return render_template('combi.html')
+
+@entrada.route('/templates/carrito_combihongos.html')
+def Agregar_CombiHongos():
+    print("hongos")
+    Agregar_carrito("Combi Hongos",33,"hongos.png")
+    return render_template('combi.html')
+
+@entrada.route('/templates/carrito_combimexican.html')
+def Agregar_CombiMexican():
+    print("mexican")
+    Agregar_carrito("Mexican Combi",32,"hmexicana.png")
+    return render_template('combi.html')
+
+@entrada.route('/templates/carrito_combibuffalo.html')
+def Agregar_CombiBuffalo():
+    print("buffalo")
+    Agregar_carrito("Combi Buffalo",35,"hclasica.png")
+    return render_template('combi.html')
+
+@entrada.route('/templates/carrito_combi4quesos.html')
+def Agregar_Combi4Quesos():
+    print("4quesos")
+    Agregar_carrito("Combi 4 Quesos",35,"hclasica.png")
+    return render_template('combi.html')
+
+
 
 @entrada.route('/templates/carrito_maito.html')
 def Agregar_ArrozChaufa():
     Agregar_carrito("Arroz Chaufa",27,"arrozchaufa.png")
     return render_template('maito.html')
 
+@entrada.route('/templates/carrito_maito_tallarin_salteado.html')
+def Agregar_TallarinSalteado():
+    Agregar_carrito("Tallarin Salteado",27,"tallarinsalteado.png")
+    return render_template('maito.html')
+
+@entrada.route('/templates/carrito_maito_aereopuerto.html')
+def Agregar_Aerepuerto():
+    Agregar_carrito("Aerepuerto",27,"tallarinsalteado.png")
+    return render_template('maito.html')
+
+@entrada.route('/templates/carrito_maito_kungpao.html')
+def Agregar_KungPao():
+    Agregar_carrito("Kung Pao",35,"kungpao.png")
+    return render_template('maito.html')
+
+@entrada.route('/templates/carrito_maito_lomosalteado.html')
+def Agregar_LomoSalteado():
+    Agregar_carrito("Lomo Salteado",35,"lomosalteado.png")
+    return render_template('maito.html')
+
+@entrada.route('/templates/carrito_maito_costillacerdo.html')
+def Agregar_CostillaCerdo():
+    Agregar_carrito("Costilla de Cerdo",37,"costilladecerdo.png")
+    return render_template('maito.html')
+
+
+
+
+
+
 @entrada.route('/templates/carrito_pocho.html')
 def Agregar_PipocasPollo():
     Agregar_carrito("Pipocas de Pollo",23,"pipocasdepollo.png")
     return render_template('pocho.html')
 
+@entrada.route('/templates/carrito_pocho_cuartopollo.html')
+def Agregar_CuartoPollo():
+    Agregar_carrito("Cuarto de pollo",25,"cuartodepollo.png")
+    return render_template('pocho.html')
+
+@entrada.route('/templates/carrito_octavopollo.html')
+def Agregar_OctavoPollo():
+    Agregar_carrito("Octavo de pollo",18,"octavodepollo.png")
+    return render_template('pocho.html')
+
+
+
 @entrada.route('/templates/carrito_salchipapus.html')
 def Agregar_Salchipapu():
     Agregar_carrito("Salchipapu Tradicional",18,"ssalchipapu.png")
     return render_template('salchipapus.html')
+
+@entrada.route('/templates/carrito_salchipapu_argentina.html')
+def Agregar_Salchipapu_Argentina():
+    Agregar_carrito("Salchipapu Aregtina",23,"sargentina.png")
+    return render_template('salchipapus.html')
+    
+@entrada.route('/templates/carrito_salchipapu_mexicana.html')
+def Agregar_Salchipapu_Mexicana():
+    Agregar_carrito("Salchipapu Mexicana",23,"smexicana.png")
+    return render_template('salchipapus.html')
+
+@entrada.route('/templates/carrito_salchipapu_peruana.html')
+def Agregar_Salchipapu_Peruana():
+    Agregar_carrito("Salchipapu Peruana",23,"speruana.png")
+    return render_template('salchipapus.html')
+
+@entrada.route('/templates/carrito_salchipapu_cerdo.html')
+def Agregar_Salchipapu_Cerdo():
+    Agregar_carrito("Salchipapu Cerdo",23,"scerdo.png")
+    return render_template('salchipapus.html')
+
+@entrada.route('/templates/carrito_salchipapu_4quesos.html')
+def Agregar_Salchipapu_4Quesos():
+    Agregar_carrito("Salchipapu 4 Quesos",35,"s4quesos.png")
+    return render_template('salchipapus.html')
+
+
+
+
 
 
 
