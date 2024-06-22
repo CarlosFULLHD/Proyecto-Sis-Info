@@ -1,145 +1,158 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RESTAURANTES</title>
-<!-- REFERENCIAMOS A GOOGLE FONTS CON LA FUENTE SRIRACHA -->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Sriracha&display=swap" rel="stylesheet">
-<!-- LINK A CSS -->
-<!--  -->
-<link rel="stylesheet" type="text/css" href="{{url_for('static',filename='css/style-carrito.css') }}" />
-</head>
-<body>
-    <!-- COPIA DEL HEADER NORMAL -->
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Shopping Cart</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Sriracha&display=swap"
+      rel="stylesheet"
+    />
+    <!-- CSS -->
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{{url_for('static',filename='css/style-carrito.css') }}"
+    />
+  </head>
+  <body>
+    <!-- Header -->
     <header>
-        <div class="container">
-        <!-- Vamos a poner nuestros elementos dentro de un container y le damos un ancho maximo, margen automatico para que se mantenga en el centro -->
-            <img class="logo" src="/static/css/images/logostudiocuisine.png" alt="Logo StudioCuisine">      
-        <!-- <div class="logocuisine"></div> -->
-              
-              
-              
-              
-              <nav>
-                  <a href="/templates/index.html">Inicio</a>
-                  <a href="/templates/menu1combi.html">Productos</a>
-                  <a href="#">Antójate</a>
-                  <a href="#">Restaurantes</a>
-                  <a href="#">Contactanos</a>
-                  <a href=""></a><!-- PEDIR Aqui se hara el pedido xd -->
-              </nav>   
-          </div>
-          
-</header>
+      <div class="container">
+        <img
+          class="logo"
+          src="/static/css/images/logostudiocuisine.png"
+          alt="Logo StudioCuisine"
+        />
+        <nav>
+          <a href="/templates/index.html">Inicio</a>
+          <a href="/templates/menu1combi.html">Productos</a>
+          <a href="#">Antójate</a>
+          <a href="#">Restaurantes</a>
+          <a href="#">Contáctanos</a>
+        </nav>
+      </div>
+    </header>
 
-<section class="seccionmenu">
-    <h1 class="titulomenu">Bienvenido a tu carrito:</h1>
-    <div class="fondogris">
+    <!-- Shopping Cart Section -->
+    <section class="seccionmenu">
+      <h1 class="titulomenu">Bienvenido a tu carrito:</h1>
+      <div class="fondogris">
         <div class="contenido">
-            <div class="container-cards">
+          <div class="container-cards">
+            <!-- Shopping Cart Form -->
+            <form action="/templates/carrito.html" method="get">
+              <div id="shopping-cart">
+                <div class="txt-heading">Carrito de compras</div>
+                {% if 'cart_item' in session %}
+                <a id="btnEmpty" href="{{ url_for('.empty_cart') }}"
+                  >Vaciar Carrito</a
+                >
+                <table class="tbl-cart" cellpadding="10" cellspacing="1">
+                  <tbody>
+                    <tr>
+                      <th style="text-align: left">Nombre</th>
+                      <th style="text-align: left">Código</th>
+                      <th style="text-align: right" width="5%">Cantidad</th>
+                      <th style="text-align: right" width="10%">
+                        Precio Unitario
+                      </th>
+                      <th style="text-align: right" width="10%">Precio</th>
+                      <th style="text-align: center" width="5%">Quitar</th>
+                    </tr>
+                    {% for key, val in session['cart_item'].items() %} {% set
+                    quantity = session['cart_item'][key]['quantity'] %} {% set
+                    price = session['cart_item'][key]['price'] %} {% set
+                    item_price = session['cart_item'][key]['total_price'] %}
+                    <tr>
+                      <td>
+                        <img
+                          src="/static/images/{{ session['cart_item'][key]['image'] }}"
+                          class="cart-item-image"
+                        />{{ session['cart_item'][key]['name'] }}
+                      </td>
+                      <td style="text-align: right">
+                        {{ session['cart_item'][key]['code'] }}
+                      </td>
+                      <td style="text-align: right">{{ quantity }}</td>
+                      <td style="text-align: right">&#36; {{ price }}</td>
+                      <td style="text-align: right">&#36; {{ item_price }}</td>
+                      <td style="text-align: center">
+                        <a
+                          href="{{ url_for('.delete_product', code=session['cart_item'][key]['code']) }}"
+                          class="btnRemoveAction"
+                        >
+                          <img
+                            src="/static/images/icon-delete.png"
+                            alt="Remove Item"
+                          />
+                        </a>
+                      </td>
+                    </tr>
+                    {% endfor %}
+                    <tr>
+                      <td colspan="2" align="right">Total:</td>
+                      <td align="right">{{ session['all_total_quantity'] }}</td>
+                      <td align="right" colspan="2">
+                        <strong>&#36; {{ session['all_total_price'] }}</strong>
+                      </td>
+                      <td></td>
+                    </tr>
+                  </tbody>
+                </table>
+                {% else %}
+                <div class="no-records">Tu carrito está vacío</div>
+                {% endif %}
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
 
-                  <!-- FORMULARIO -->
-                  <form action="/templates/carrito.html" method="get">
-
-                    <!-- INICIA CARD -->
-                    
-                         <!-- INICIa el carrito, aun no hay css -->
-                        <div id="shopping-cart">
-                            <div style="background-color:rgb(0, 197, 223); color:black;" class="txt-heading">Carrito de compras</div>		
-                            {% if 'cart_item' in session %}
-                                <a  style="background-color:rgb(207, 7, 7); color:black" id="btnEmpty" href="{{ url_for('.empty_cart') }}">Vaciar Carrito</a>
-                                <table style="background-color:rgb(0, 197, 223);"class="tbl-cart" cellpadding="10" cellspacing="1">
-                                <tbody style="background-color:rgb(87, 87, 87);">
-                                    <tr>
-                                        <th style="text-align:left;">Nombre</th>
-                                        <th style="text-align:left;">Codigo</th>
-                                        
-                                        <th style="text-align:right;" width="5%">Cantidad</th>
-                                        <th style="text-align:right;" width="10%">Precio Unitario</th>
-                                        <th style="text-align:right;" width="10%">Precio</th>
-                                        <th style="text-align:center;" width="5%">Quitar</th>
-                                    </tr>
-                                    {% for key, val in session['cart_item'].items() %}
-                                        {% set quantity = session['cart_item'][key]['quantity'] %}
-                                        {% set price = session['cart_item'][key]['price'] %}
-                                        {% set item_price = session['cart_item'][key]['total_price'] %}					
-                                        <tr>
-                                            <td style="color:black;"><img src="/static/images/{{ session['cart_item'][key]['image'] }}" class="cart-item-image" />{{ session['cart_item'][key]['name'] }}</td>
-                                            <td style="color:black;" style="text-align:right;">{{ session['cart_item'][key]['code'] }}</td>
-                                            <!--<td style="text-align:right;">{{ quantity }}</td>-->
-                                            <td style="color:black;text-align:right;">{{ quantity }}</td>
-                                            <td  style="color:black;text-align:right;">&#36; {{ price }}</td>
-                                            <td  style="color:black;text-align:right;">&#36; {{ item_price }}</td>
-                                            <td style="text-align:center;">
-                                                <a href="{{ url_for('.delete_product', code=session['cart_item'][key]['code']) }}" class="btnRemoveAction">
-                                                    <img src="/static/images/icon-delete.png" alt="Remove Item" />
-                                                </a>
-                                            </td>
-                                        </tr>
-                                    {% endfor %}
-                                    <tr>
-                                        <td style="color:black;" colspan="2" align="right">Total:</td>
-                                        <td style="color:black;" align="right">{{ session['all_total_quantity'] }}</td>
-                                        <td style="color:black;" align="right" colspan="2"><strong>&#36; {{ session['all_total_price'] }}</strong></td>
-                                        <td></td>
-                                    </tr>
-                                </tbody>
-                                </table>
-                            {% else: %}
-                                <div class="no-records">Your Cart is Empty</div>
-                            {% endif %}
-                        </div>
-                    
-                    <!-- FIN CARD -->
-
-                </form>
-            </div>
-
-
-    </div>
-
-</section>
-<section class="informacionadicional">
-    <div class="container2">
+    <!-- Additional Information Section -->
+    <section class="informacionadicional">
+      <div class="container2">
         <div class="acercade">
-            <div class="card1">    
-                <div class="producto-info">
-                    <h2 class="producto">Acerca de:</h2>
-                    <p class="texto">Studio Cuisine es un Dark Kitchen donde puedes encontrar 
-                        diferentes líneas de comida para degustar y escoger según tu gusto.</p></div>
+          <div class="card1">
+            <div class="producto-info">
+              <h2 class="producto">Acerca de:</h2>
+              <p class="texto">
+                Studio Cuisine es un Dark Kitchen donde puedes encontrar
+                diferentes líneas de comida para degustar y escoger según tu
+                gusto.
+              </p>
             </div>
-            <div class="card1">    
-                <div class="producto-info">
-                    <h2 class="producto">Información:</h2>
-                    <p class="texto">Donde encontrarnos:
-                        Auquisamaña Alto, Calle Jazmines #100.</p></div>
+          </div>
+          <div class="card1">
+            <div class="producto-info">
+              <h2 class="producto">Información:</h2>
+              <p class="texto">
+                Donde encontrarnos: Auquisamaña Alto, Calle Jazmines #100.
+              </p>
             </div>
-            <div class="card1">    
-                <div class="producto-info">
-                    <h2 class="producto">Contacto:</h2>
-                    <p class="texto">Celular:  79151105
-                        email: std.cuisine@gmail.com</p></div>
+          </div>
+          <div class="card1">
+            <div class="producto-info">
+              <h2 class="producto">Contacto:</h2>
+              <p class="texto">
+                Celular: 79151105 email: std.cuisine@gmail.com
+              </p>
             </div>
-
+          </div>
         </div>
-
-
         <div class="imagenlogo2">
-            <img class="logo2"src="/static/css/images/logostudiocuisine.png" alt="LogoStudioCuisine2">
-
-
+          <img
+            class="logo2"
+            src="/static/css/images/logostudiocuisine.png"
+            alt="LogoStudioCuisine2"
+          />
         </div>
-
-    </div>
-
-
-
-</section>
-
-
-</body>
+      </div>
+    </section>
+  </body>
 </html>

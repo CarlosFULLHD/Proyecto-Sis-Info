@@ -1,0 +1,36 @@
+version: '3.8'
+
+services:
+  db:
+    image: mysql:8.0
+    container_name: studiocuisine_db
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: studiocuisine
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
+    ports:
+      - "3306:3306"
+    volumes:
+      - db_data:/var/lib/mysql
+      - ./studiocuisine.sql:/docker-entrypoint-initdb.d/studiocuisine.sql
+
+  web:
+    build: .
+    container_name: studiocuisine_web
+    command: flask run --host=0.0.0.0
+    ports:
+      - "5000:5000"
+    depends_on:
+      - db
+    environment:
+      FLASK_ENV: development
+      MYSQL_HOST: db
+      MYSQL_DATABASE: studiocuisine
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
+    volumes:
+      - .:/app
+
+volumes:
+  db_data:
